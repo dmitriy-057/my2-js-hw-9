@@ -17,7 +17,7 @@ function onStartBtnClick() {
         return;
     };
 
-    intervalId = setInterval(()=> {
+    intervalId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor()
     },1000);
 };
