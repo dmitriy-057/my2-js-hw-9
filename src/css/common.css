@@ -16,3 +16,67 @@ img {
   display: block;
   max-width: 100%;
 }
+.form-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 10px 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+#datetime-picker {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+button[data-start] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #6a5acd, #836fff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[data-start]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(106, 90, 205, 0.4);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 100vh;
+}
+.timer {
+  text-align: center;
+}
+
+.timer {
+  display: inline-block;
+  min-width: 50px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(145deg, #8f7aec, rgba(106, 90, 205, 0.4));
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 16px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.05),
+    inset -2px -2px 4px rgba(166, 165, 236, 0.7),
+    0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+

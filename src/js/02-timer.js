@@ -1,6 +1,9 @@
 import flatpickr from "flatpickr";
 // import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";
+// import Notiflix from 'notiflix';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import 'animate.css';
 
 
 const dateTimeInput = document.getElementById("datetime-picker");
@@ -12,6 +15,12 @@ const refs = {
     mins: document.querySelector("[data-minutes]"),
     secs: document.querySelector("[data-seconds]"),
 };
+// add Animate css class
+refs.days.classList.add('animate__animated', 'animate__flipInX');
+refs.hours.classList.add('animate__animated', 'animate__flipInX');
+refs.mins.classList.add('animate__animated', 'animate__flipInX');
+refs.secs.classList.add('animate__animated', 'animate__flipInX');
+
 
 startBtn.disabled = true;
 let intervalId;
@@ -32,7 +41,11 @@ const options = {
         console.log(userSelectedDate);
     
     if(userSelectedDate < Date.now()) {
-        window.alert("Please choose a date in the future");
+        Report.failure(
+        'Будь-ласка вибери дату у майбутньому', 
+        'Лох! Ну як таймер може працювати у минулому, <br/><br/> - Дмитро Гончаров',
+        "Спробуй ще!"
+        );
     } else if(userSelectedDate > Date.now()) {
         startBtn.disabled = false;
     }
@@ -40,25 +53,44 @@ const options = {
   };
 
 function onClickBtn() {
+    // запрет повторного запуска таймера
+    if(intervalId) {
+        return;
+    };
+
    intervalId = setInterval(() => {
     const resultMs = Math.floor(userSelectedDate - new Date());
 
     if(resultMs <= 0) {
         clearInterval(intervalId);
+        intervalId = null;
+        Report.success("Time is over");
         console.log('Таймер отключен');
         return;
     };
 
     const time = convertMs(resultMs);
     console.log(time);
-    refs.days.textContent = time.days;
-    refs.hours.textContent = time.hours;
-    refs.mins.textContent = time.minutes;
-    refs.secs.textContent = time.seconds;
+    
+
+    refs.days.textContent = addLeadingZero(time.days);
+    refs.hours.textContent = addLeadingZero(time.hours);
+    refs.mins.textContent = addLeadingZero(time.minutes);
+    refs.secs.textContent = addLeadingZero(time.seconds);
+
+    refs.secs.classList.remove('animate__flipInX');
+    void refs.secs.offsetWidth; // принудительный reflow
+    refs.secs.classList.add('animate__flipInX');
+
     }, 1000);
+
 
 };
 
+function addLeadingZero(value){
+    return String(value).padStart(2, "0");
+}
+ 
 flatpickr(dateTimeInput, options);
 
 function convertMs(ms) {
