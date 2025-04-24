@@ -16,10 +16,9 @@ const refs = {
     secs: document.querySelector("[data-seconds]"),
 };
 // add Animate css class
-refs.days.classList.add('animate__animated', 'animate__flipInX');
-refs.hours.classList.add('animate__animated', 'animate__flipInX');
-refs.mins.classList.add('animate__animated', 'animate__flipInX');
-refs.secs.classList.add('animate__animated', 'animate__flipInX');
+Object.values(refs).forEach(el => {
+    el.classList.add('animate__animated', 'animate__flipInX')
+});
 
 
 startBtn.disabled = true;
@@ -42,7 +41,7 @@ const options = {
     
     if(userSelectedDate < Date.now()) {
         Report.failure(
-        'Будь-ласка вибери дату у майбутньому', 
+        'Вибери дату у майбутньому', 
         'Лох! Ну як таймер може працювати у минулому, <br/><br/> - Дмитро Гончаров',
         "Спробуй ще!"
         );
