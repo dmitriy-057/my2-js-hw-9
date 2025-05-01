@@ -42,8 +42,8 @@ const options = {
     if(userSelectedDate < Date.now()) {
         Report.failure(
         'Вибери дату у майбутньому', 
-        'Лох! Ну як таймер може працювати у минулому, <br/><br/> - Дмитро Гончаров',
-        "Спробуй ще!"
+        'От як таймер може працювати у минулому?!',
+        "OK"
         );
     } else if(userSelectedDate > Date.now()) {
         startBtn.disabled = false;
